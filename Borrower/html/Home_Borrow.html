@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home | Borrow</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'login' %}">Home</a>
+            <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'contact_us' %}">Contact Us</a>
+        </nav>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Logout" />
+        </form>
+    </header>
+    <div></div>
+    <footer></footer>
+</body>
+
+</html>

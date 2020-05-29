@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home | Lend</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'login' %}">Home</a>
+            <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'contact_us' %}">Contact Us</a>
+        </nav>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Logout" />
+        </form>
+    </header>
+    <div>
+        {% for user in users_list %}
+        <div>
+            <h6>Username : {{ user.username }} | Name : {{ user.first_name }} {{ user.last_name }}</h6>
+            <h6>PAN : {{ user.pan }} | Repayment Score : {{ user.repayment_score }}</h6>
+        </div>
+        {% endfor %}
+    </div>
+    <footer></footer>
+</body>
+
+</html>

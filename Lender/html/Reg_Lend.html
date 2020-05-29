@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register | Lend</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'login' %}">Home</a>
+            <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'contact_us' %}">Contact Us</a>
+        </nav>
+    </header>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <footer></footer>
+</body>
+
+</html>

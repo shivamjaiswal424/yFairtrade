@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Signup</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'login' %}">Home</a>
+            <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'contact_us' %}">Contact Us</a>
+        </nav>
+    </header>
+    <div>
+        <div>
+            <button>
+                <a href="lend/reg_lend">Register as Lender</a>
+            </button>
+            <button>
+                <a href="borrow/reg_borrow">Register as Borrower</a>
+            </button>
+        </div>
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+    <footer>
+        <div>
+            <h6>All rights reserved.</h6>
+        </div>
+    </footer>
+</body>
+
+</html>
