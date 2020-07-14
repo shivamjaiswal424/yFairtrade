@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9d0a43c5-2d42-4b81-857e-a1c5530de689" name="Default Changelist" comment="" />
+    <list default="true" id="9d0a43c5-2d42-4b81-857e-a1c5530de689" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Auth/html/Login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Auth/html/Login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FairTrade/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/FairTrade/settings.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,20 +21,36 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1bPYaVpPhoiK9zwXavPx6UxcD0R" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Auth" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ABRockzzz143.anand-HP\Documents\GitHub\FairTrade\Auth" />
+      <recent name="C:\Users\ABRockzzz143.anand-HP\Documents\GitHub\FairTrade\FairTrade" />
+      <recent name="C:\Users\ABRockzzz143.anand-HP\Documents\GitHub\FairTrade\Auth\static" />
+      <recent name="C:\Users\ABRockzzz143.anand-HP\Documents\GitHub\FairTrade\Auth\html" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ABRockzzz143.anand-HP\Documents\GitHub\FairTrade\static" />
+      <recent name="C:\Users\ABRockzzz143.anand-HP\Documents\GitHub\FairTrade\assets" />
       <recent name="C:\Users\ABRockzzz143.anand-HP\Desktop\Chitranshu\FairTrade" />
       <recent name="C:\Users\ABRockzzz143.anand-HP\Desktop\Chitranshu\FairTrade\Auth\html" />
     </key>
@@ -127,18 +149,6 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -189,6 +199,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1590743133633" />
+    <state x="263" y="98" key="IDE.errors.dialog" timestamp="1594744371886">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="263" y="98" key="IDE.errors.dialog/0.0.1366.728@0.0.1366.728" timestamp="1594744371886" />
     <state x="186" y="9" key="SettingsEditor" timestamp="1590689475976">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

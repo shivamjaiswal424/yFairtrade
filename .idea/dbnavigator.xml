@@ -25,7 +25,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="9abc95a9-610a-4afc-8de9-c8625d68368e">
-        <schema name="main" object-types="view, index, dataset trigger, constraint, column, table" />
+        <schema name="main" object-types="table, view" />
       </connection>
     </loaded-nodes>
   </component>
@@ -34,7 +34,7 @@
       <console name="Connection" type="STANDARD" schema="" session="Main" />
     </connection>
     <connection id="9abc95a9-610a-4afc-8de9-c8625d68368e">
-      <console name="FairTrade " type="STANDARD" schema="main" session="Main"><![CDATA[select * from "Borrower_fairtradeborrower""]]></console>
+      <console name="FairTrade " type="STANDARD" schema="main" session="Main">select * from &quot;Borrower_fairtradeborrower&quot;&quot;</console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

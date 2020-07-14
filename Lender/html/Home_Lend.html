@@ -1,32 +1,55 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>Home | Lend</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </head>
 
-<body>
-    <header>
-        <nav>
-            <a href="{% url 'login' %}">Home</a>
-            <a href="{% url 'about' %}">About</a>
-            <a href="{% url 'contact_us' %}">Contact Us</a>
-        </nav>
-        <form action="{% url 'logout' %}" method="post">
-            {% csrf_token %}
-            <input type="submit" value="Logout" />
-        </form>
-    </header>
-    <div>
-        {% for user in users_list %}
-        <div>
-            <h6>Username : {{ user.username }} | Name : {{ user.first_name }} {{ user.last_name }}</h6>
-            <h6>PAN : {{ user.pan }} | Repayment Score : {{ user.repayment_score }}</h6>
+<body class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="{% url 'login' %}">FairTrade</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'about' %}">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'contact_us' %}">Contact Us</a>
+                        </li>
+                        <li>
+                            <form action="{% url 'logout' %}" method="post">
+                                {% csrf_token %}
+                                <input type="submit" class="btn btn-light" value="Logout" />
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
-        {% endfor %}
     </div>
-    <footer></footer>
+    {% for user in users_list %}
+    <div class="row my-3">
+        <div class="col-sm-6">
+            <div class="card">
+                <h5 class="card-header">Name : {{ user.first_name }} {{ user.last_name }}</h5>
+                <div class="card-body">
+                    <h5 class="card-title">Repayment Score : {{ user.repayment_score }}</h5>
+                    <p class="card-text">Username : {{ user.username }}</p>
+                    <p class="card-text">PAN : {{ user.pan }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 </body>
 
 </html>
