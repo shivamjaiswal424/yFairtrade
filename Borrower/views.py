@@ -5,6 +5,7 @@ from numpy import array
 from sklearn.preprocessing import StandardScaler
 
 from .forms import RegisterBorrowerForm
+from Lender.models import FairTradeLender
 
 
 def get_repayment_score(instance):
@@ -46,4 +47,4 @@ def reg_borrow(request):
 
 
 def home_borrow(request):
-    return render(request, 'Home_Borrow.html')
+    return render(request, 'Home_Borrow.html',{'users_list':FairTradeLender.objects.all().order_by('username')})

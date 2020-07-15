@@ -6,7 +6,6 @@
     <title>Home | Lend</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </head>
 
 <body class="container">
@@ -37,7 +36,9 @@
         </div>
     </div>
     {% for user in users_list %}
-    <div class="row my-3">
+    {% if not forloop.counter|divisibleby:2 %}
+    <div class="row my-4">
+    {% endif %}
         <div class="col-sm-6">
             <div class="card">
                 <h5 class="card-header">Name : {{ user.first_name }} {{ user.last_name }}</h5>
@@ -48,7 +49,9 @@
                 </div>
             </div>
         </div>
+    {% if forloop.counter|divisibleby:2 %}
     </div>
+    {% endif %}
     {% endfor %}
 </body>
 

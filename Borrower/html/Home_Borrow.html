@@ -6,7 +6,6 @@
     <title>Home | Borrow</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </head>
 
 <body class="container">
@@ -36,6 +35,24 @@
             </nav>
         </div>
     </div>
+    {% for user in users_list %}
+    {% if not forloop.counter|divisibleby:2 %}
+    <div class="row my-4">
+        {% endif %}
+        <div class="col-sm-6">
+            <div class="card">
+                <h5 class="card-header">Name : {{ user.first_name }} {{ user.last_name }}</h5>
+                <div class="card-body">
+                    <h5 class="card-title">Credit available : {{ user.wallet_credit }}</h5>
+                    <p class="card-text">Username : {{ user.username }}</p>
+                    <p class="card-text">PAN : {{ user.pan }}</p>
+                </div>
+            </div>
+        </div>
+    {% if forloop.counter|divisibleby:2 %}
+    </div>
+    {% endif %}
+    {% endfor %}
 </body>
 
 </html>
