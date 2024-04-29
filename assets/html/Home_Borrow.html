@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home | Borrow</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+
+<body class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="{% url 'login' %}">FairTrade</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'about' %}">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'contact_us' %}">Contact Us</a>
+                        </li>
+                        <li>
+                            <form action="{% url 'logout' %}" method="post">
+                                {% csrf_token %}
+                                <input type="submit" class="btn btn-light" value="Logout" />
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    {% for user in users_list %}
+    {% if not forloop.counter|divisibleby:2 %}
+    <div class="row my-4">
+        {% endif %}
+        <div class="col-sm-6">
+            <div class="card">
+                <h5 class="card-header">Name : {{ user.first_name }} {{ user.last_name }}</h5>
+                <div class="card-body">
+                    <h5 class="card-title">Credit available : {{ user.wallet_credit }}</h5>
+                    <p class="card-text">Username : {{ user.username }}</p>
+                    <p class="card-text">PAN : {{ user.pan }}</p>
+                </div>
+            </div>
+        </div>
+    {% if forloop.counter|divisibleby:2 %}
+    </div>
+    {% endif %}
+    {% endfor %}
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FairTrade | About</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+
+<body class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="{% url 'login' %}">FairTrade</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'about' %}">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'contact_us' %}">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div>
+        <h1>About Us</h1>
+        <p>
+            On FairTrade, visitors, as per their requirement, can register as lenders or borrowers. FairTrade undertakes
+            a comprehensive verification process based on personal, financial and professional information provided of
+            all its registered Borrowers and Lenders.
+        </p>
+        <p>
+            An automated system suggests the loan period, loan amount and interest rate against each Borrower’s profile,
+            which is indicative of the Borrower’s capability to efficiently repay the loan. Lenders
+            can make offers to fund borrower’s requirement which are accepted on first come first serve basis. Both
+            borrowers and lenders can strike deals with multiple members. Thus, lenders can fund a
+            portion of the total loan requirement of multiple borrowers and borrowers can seek to raise money from
+            multiple
+            lenders.
+        </p>
+        <p>
+            Once an agreement is reached between the borrower and the lender, a formal contract is signed by them. The
+            loan amount is then transferred to the borrower’s account and the borrower makes periodic
+            repayments via EMI over the stipulated time period.
+        </p>
+        <p>
+            Repayment can be done through an online, automated process and tracked via their unique account on
+            www.fairtrade.com. FairTrade provides a fair, transparent, technology-driven platform for the whole
+            process to happen smoothly and quickly.
+        </p>
+    </div>
+</body>
+
+</html>
