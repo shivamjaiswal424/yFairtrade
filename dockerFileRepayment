@@ -1,0 +1,22 @@
+# Base image - Choose a lightweight Python image
+FROM python:3.8-slim
+
+# Create working directory 
+WORKDIR /app
+
+# Copy dependencies
+COPY requirements.txt /app/
+
+# Install dependencies
+RUN pip install -r requirements.txt
+
+# Copy your Flask application files
+COPY model.pkl /app/
+COPY scalar.pkl /app/
+COPY repayment-score.py /app/
+
+# Expose the port Flask will use
+EXPOSE 5000
+
+# Command to start the Flask app
+CMD ["flask", "run", "--host=0.0.0.0"] 
