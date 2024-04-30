@@ -13,6 +13,8 @@ COPY ./Borrower /app/Borrower
 COPY ./Lender /app/Lender
 COPY ./Auth /app/Auth
 COPY manage.py /app/
+COPY current.json /app/
+COPY current.py /app/
 
 # Expose the port Django uses
 EXPOSE 8000

@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        SESSION_IMAGE_NAME = 'fairtrade_session'
         SERVER_IMAGE_NAME = 'fairtrade_server'
         APP_IMAGE_NAME = 'fairtrade'
         DOCKER_HUB_USERNAME = 'pythospach'
@@ -19,7 +18,6 @@ pipeline {
         stage('Pull Docker Images') {
             steps {
                 sh """
-                docker pull ${DOCKER_HUB_USERNAME}/${SESSION_IMAGE_NAME}:latest
                 docker pull ${DOCKER_HUB_USERNAME}/${SERVER_IMAGE_NAME}:latest
                 docker pull ${DOCKER_HUB_USERNAME}/${APP_IMAGE_NAME}:latest
                 """
