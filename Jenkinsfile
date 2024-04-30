@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         SERVER_IMAGE_NAME = 'fairtrade_server'
-        APP_IMAGE_NAME = 'fairtrade'
+        APP_IMAGE_NAME = 'fairtrade_app'
         DOCKER_HUB_USERNAME = 'pythospach'
     }
 

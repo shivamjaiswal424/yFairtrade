@@ -4,11 +4,8 @@ FROM python:3.8-slim
 # Create working directory 
 WORKDIR /app
 
-# Copy dependencies
-COPY requirements.txt /app/
-
 # Install dependencies
-RUN pip install -r requirements.txt
+RUN pip install flask numpy
 
 # Copy your Flask application files
 COPY model.pkl /app/
@@ -19,4 +16,4 @@ COPY repayment-score.py /app/
 EXPOSE 5000
 
 # Command to start the Flask app
-CMD ["flask", "run", "--host=0.0.0.0"] 
+CMD ["python", "repayment-score.py"] 

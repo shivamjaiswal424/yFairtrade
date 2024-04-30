@@ -5,9 +5,6 @@ services:
       - "5000:5000"
 
   app:
-    image: pythospach/fairtrade:latest
+    image: pythospach/fairtrade_app:latest
     ports:
       - "8000:8000"
-    depends_on:
-      - server
-    command: ["sh", "-c", "python manage.py migrate"]

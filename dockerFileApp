@@ -1,23 +1,20 @@
-# Base image
 FROM python:3.8-slim
 
-# Work directory
 WORKDIR /app
 
-RUN pip install django
+RUN pip install django requests
 
-# Copy the Django project 
 COPY ./assets /app/assets
-COPY ./FairTrade /app/FairTrade
+COPY ./Auth /app/Auth
 COPY ./Borrower /app/Borrower
 COPY ./Lender /app/Lender
-COPY ./Auth /app/Auth
-COPY manage.py /app/
+COPY ./FairTrade /app/FairTrade
 COPY current.json /app/
 COPY current.py /app/
+COPY manage.py /app/
 
-# Expose the port Django uses
 EXPOSE 8000
 
-# Command to start Django
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+RUN python manage.py migrate
+
+CMD ["python", "manage.py", "runserver"]
