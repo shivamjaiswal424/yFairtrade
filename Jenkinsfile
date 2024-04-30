@@ -18,13 +18,14 @@ pipeline {
 
         stage('Pull Docker Images') {
             steps {
-                script {
-                    docker.image("${DOCKER_HUB_USERNAME}/${SESSION_IMAGE_NAME}:latest").pull()
-                    docker.image("${DOCKER_HUB_USERNAME}/${SERVER_IMAGE_NAME}:latest").pull()
-                    docker.image("${DOCKER_HUB_USERNAME}/${APP_IMAGE_NAME}:latest").pull()
-                }
+                sh """
+                docker pull ${DOCKER_HUB_USERNAME}/${SESSION_IMAGE_NAME}:latest
+                docker pull ${DOCKER_HUB_USERNAME}/${SERVER_IMAGE_NAME}:latest
+                docker pull ${DOCKER_HUB_USERNAME}/${APP_IMAGE_NAME}:latest
+                """
             }
         }
+
 
         stage('Run Docker Compose') {
             steps {
