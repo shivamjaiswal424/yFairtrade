@@ -1,9 +1,4 @@
-version: "3.8" 
-
 services:
-  session:
-    image: pythospach/fairtrade_session:latest
-
   server:
     image: pythospach/fairtrade_server:latest
     ports:
@@ -14,6 +9,5 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - session
       - server
     command: ["sh", "-c", "python manage.py migrate"]
