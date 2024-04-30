@@ -30,8 +30,8 @@ pipeline {
         stage('Run Docker Compose') {
             steps {
                 script {
-                    dir('C:/Users/Pythospach/Documents/GitHub/FairTrade') {
-                        sh 'C:/Program Files/Docker/Docker/resources/bin/docker-compose up -d'
+                    dir('/home/shivam/Desktop/fairtrade') {
+                        sh '/usr/bin/docker-compose up -d'
                     }
                 }
             }
