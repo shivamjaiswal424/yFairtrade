@@ -1,24 +1,23 @@
 services:
-  database:
-    image: pythospach/fairtrade_database:latest
+  sqlite-container:
+    image: alpine:latest
     volumes:
-      - sqlite-data:/app 
+      - ./database:/app
+    command: sh -c "apk --no-cache add sqlite && cp /app/db.sqlite3 /app/db.sqlite && sqlite3 /app/db.sqlite < /app/init.sql && tail -f /dev/null"
 
   server:
     image: pythospach/fairtrade_server:latest
     ports:
       - "5000:5000"
-    depends_on:
-      - database
 
   app:
     image: pythospach/fairtrade_app:latest
     ports:
       - "8000:8000"
-    volumes:
-      - sqlite-data:/app/db.sqlite3 
     depends_on:
-      - database
+      - sqlite-container
+    volumes:
+      - sqlite_data:/app/db
 
 volumes:
-  sqlite-data:
+  sqlite_data:
