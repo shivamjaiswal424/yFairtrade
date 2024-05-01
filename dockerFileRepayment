@@ -16,4 +16,4 @@ COPY repayment-score.py /app/
 EXPOSE 5000
 
 # Command to start the Flask app
-CMD ["python", "repayment-score.py"] 
+CMD ["python", "repayment-score.py", "--host=127.0.0.1"] 
