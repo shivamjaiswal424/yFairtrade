@@ -17,6 +17,4 @@ COPY manage.py /app/
 
 EXPOSE 8000
 
-RUN python manage.py migrate
-
 CMD ["python", "manage.py", "runserver", "localhost:8000"]

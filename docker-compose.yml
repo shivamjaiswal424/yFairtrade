@@ -1,10 +1,24 @@
 services:
+  database:
+    image: pythospach/fairtrade_database:latest
+    volumes:
+      - sqlite-data:/app 
+
   server:
     image: pythospach/fairtrade_server:latest
     ports:
       - "5000:5000"
+    depends_on:
+      - database
 
   app:
     image: pythospach/fairtrade_app:latest
     ports:
       - "8000:8000"
+    volumes:
+      - sqlite-data:/app/db.sqlite3 
+    depends_on:
+      - database
+
+volumes:
+  sqlite-data:

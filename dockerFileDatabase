@@ -1,0 +1,9 @@
+FROM alpine:latest
+
+RUN apk --no-cache add sqlite
+
+WORKDIR /app
+
+COPY db.sqlite3 /app/
+
+CMD ["sqlite3", "/app/db.sqlite3"]
