@@ -2,22 +2,23 @@ import logging
 import pickle
 from flask import Flask, request, jsonify
 from numpy import array
+from logging.handlers import SocketHandler
 
 app = Flask(__name__)
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
+app.logger.addHandler(SocketHandler('logstash', 5044))
+app.logger.setLevel(logging.INFO)
 
 def get_repayment_score(instance: dict):
     """Loads model and scalar, predicts repayment score."""
+    app.logger.info("Using classifier to predict...")
     with open("model.pkl", "rb") as file:
         pickle_model = pickle.load(file)
     with open("scalar.pkl", "rb") as file:
         scalar = pickle.load(file)
 
     if pickle_model is None or scalar is None:
-        logger.warning("Classifier file missing!")
+        app.logger.warning("Classifier file missing!")
         return -1
 
     x = array(
@@ -38,6 +39,7 @@ def get_repayment_score(instance: dict):
 @app.route("/get_repayment_score", methods=["POST"])
 def calculate_repayment_score():
     """Handles POST requests to calculate the score."""
+    app.logger.info("Calculating repayment score...")
     # Fetch data from the POST request
     data = request.get_json()
 
@@ -53,6 +55,7 @@ def calculate_repayment_score():
 
     # Calculate the score
     repayment_score = get_repayment_score(instance)
+    app.logger.info("Repayment score calculated to be "+repayment_score)
     # Return the score as JSON
     return jsonify({"repayment_score": repayment_score})
 

@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        SERVER_IMAGE_NAME = 'fairtrade_server'
-        APP_IMAGE_NAME = 'fairtrade_app'
+        SERVER_IMAGE_NAME = 'pythospach/fairtrade_flask_ml'
+        APP_IMAGE_NAME = 'pythospach/fairtrade_django'
         DOCKER_HUB_USERNAME = 'pythospach'
     }
 
