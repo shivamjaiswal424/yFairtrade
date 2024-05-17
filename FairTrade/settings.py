@@ -123,27 +123,30 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {message}',
-            'style': '{',
-        },
-        'simple': {
-            'format': '{levelname} {message}',
-            'style': '{',
-        },
+        'logstash': {
+            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s',
+            'datefmt': '%Y-%m-%dT%H:%M:%S%z' 
+        }
     },
     'handlers': {
         'logstash': {
+            'level': 'INFO',  # Adjust log level as needed (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+            'class': 'logstash.TCPLogstashHandler',
+            'host': 'localhost',  # Logstash host (change if Logstash is on a different machine)
+            'port': 5044,  # Logstash port
+            'version': 1, 
+            'message_type': 'django-log',  
+            'tags': ['django'],
+        },
+        'console': {
             'level': 'INFO',
-            'class': 'logging.handlers.SocketHandler',
-            'host': 'logstash',
-            'port': 5044,
-            'formatter': 'verbose',
+            'class': 'logging.StreamHandler',
+            'formatter': 'logstash',
         },
     },
     'loggers': {
         'django': {
-            'handlers': ['logstash'],
+            'handlers': ['console', 'logstash'],  # Send logs to both console and Logstash
             'level': 'INFO',
             'propagate': True,
         },
