@@ -1,25 +1,27 @@
 services:
-  Flask_ml:
-    # build:
-    #   context: .
-    #   dockerfile: dockerFileRepayment
-    image: pythospach/fairtrade_flask_ml
+  flask_ml:
     container_name: flask_ml
+    build:
+      context: .
+      dockerfile: dockerFileRepayment
     ports:
       - "5000:5000"
+    networks:
+      - elk
 
-  Django:
-    # build:
-    #   context: .
-    #   dockerfile: dockerFileApp
-    image: pythospach/fairtrade_django
+  django:
     container_name: django
+    build:
+      context: .
+      dockerfile: dockerFileApp
     ports:
       - "8000:8000"
     volumes:
       - sqlite_data:/data
     depends_on:
-      - Flask_ml
+      - flask_ml
+    networks:
+      - elk
 
   Elasticsearch:
     image: elasticsearch:7.16.2

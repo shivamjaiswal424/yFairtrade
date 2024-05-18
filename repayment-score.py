@@ -6,8 +6,9 @@ from logging.handlers import SocketHandler
 
 app = Flask(__name__)
 
-app.logger.addHandler(SocketHandler('logstash', 5044))
+app.logger.addHandler(SocketHandler("logstash", 5959))
 app.logger.setLevel(logging.INFO)
+
 
 def get_repayment_score(instance: dict):
     """Loads model and scalar, predicts repayment score."""
@@ -55,7 +56,7 @@ def calculate_repayment_score():
 
     # Calculate the score
     repayment_score = get_repayment_score(instance)
-    app.logger.info("Repayment score calculated to be "+repayment_score)
+    app.logger.info("Repayment score calculated to be " + str(repayment_score))
     # Return the score as JSON
     return jsonify({"repayment_score": repayment_score})
 

@@ -1,13 +1,12 @@
-import logging
 from django.shortcuts import render, redirect
 import requests
 
 from .forms import RegisterBorrowerForm
 from Lender.models import FairTradeLender
 
+import logging
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("django-app-logger")
 
 
 def reg_borrow(request):
@@ -17,7 +16,7 @@ def reg_borrow(request):
             instance = form.save(commit=False)
             instance.account_type = True
             response = requests.post(
-                "http://127.0.0.1:5000/get_repayment_score",
+                "http://flask_ml:5000/get_repayment_score",
                 json={
                     "education": instance.education,
                     "capital": instance.capital,
@@ -33,7 +32,8 @@ def reg_borrow(request):
                 logger.info("Registration successful.")
                 return redirect("home_borrow")
             except requests.exceptions.JSONDecodeError:
-                logger.warning("Error calculating repayment score!")
+                pass
+                logger.info("Error calculating repayment score!")
     else:
         form = RegisterBorrowerForm()
     return render(request, "Reg_Borrow.html", {"form": form})

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 import logging
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("django-app-logger")
 
 def about(request):
     logger.info("Rendering About page...")

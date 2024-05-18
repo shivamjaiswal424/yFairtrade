@@ -24,7 +24,7 @@ SECRET_KEY = "_@y6$4^)x3vl=1m%w$fbq-5+*i6m#=r4ka0=pxtm7n!u7)1zj%"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*", "localhost", "127.0.0.1", "0.0.0.0"]
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -121,32 +121,31 @@ STATICFILES_DIRS = [
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'logstash': {
-            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s',
-            'datefmt': '%Y-%m-%dT%H:%M:%S%z' 
-        }
-    },
+    'disable_existing_loggers': False,  # Keep Django's default logging
+
+    # 'formatters': {
+    #     'logstash': {  # Define a Logstash formatter
+    #         '()': 'logstash.LogstashFormatterV1',
+    #     },
+    # },
+
     'handlers': {
-        'logstash': {
-            'level': 'INFO',  # Adjust log level as needed (DEBUG, INFO, WARNING, ERROR, CRITICAL)
-            'class': 'logstash.TCPLogstashHandler',
-            'host': 'localhost',  # Logstash host (change if Logstash is on a different machine)
-            'port': 5044,  # Logstash port
-            'version': 1, 
-            'message_type': 'django-log',  
-            'tags': ['django'],
-        },
-        'console': {
+        'logstash': { 
             'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            'formatter': 'logstash',
+            'class': 'logstash.TCPLogstashHandler',  
+            'host': 'logstash',
+            'port': 5959,
         },
     },
+
     'loggers': {
-        'django': {
-            'handlers': ['console', 'logstash'],  # Send logs to both console and Logstash
+        'django': {  # Log messages from Django itself
+            'handlers': ['logstash'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'django-app-logger': {  # Log messages from your Django app
+            'handlers': ['logstash'],
             'level': 'INFO',
             'propagate': True,
         },
