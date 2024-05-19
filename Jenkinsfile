@@ -7,7 +7,6 @@ pipeline {
         SERVER_IMAGE_NAME = 'fairtrade_flask_ml'
         APP_IMAGE_NAME = 'fairtrade_django'
         DOCKER_HUB_USERNAME = 'pythospach'
-        DOCKER_PATH = 'C:/Program Files/Docker/Docker/resources/bin'
     }
 
     stages {
@@ -21,8 +20,8 @@ pipeline {
         stage('Pull') {
             steps {
                 bat """
-                "${DOCKER_PATH}/docker.exe" pull ${DOCKER_HUB_USERNAME}/${SERVER_IMAGE_NAME}:latest
-                "${DOCKER_PATH}/docker.exe" pull ${DOCKER_HUB_USERNAME}/${APP_IMAGE_NAME}:latest
+                docker pull ${DOCKER_HUB_USERNAME}/${SERVER_IMAGE_NAME}:latest
+                docker pull ${DOCKER_HUB_USERNAME}/${APP_IMAGE_NAME}:latest
                 """
             }
         }
@@ -30,7 +29,7 @@ pipeline {
         stage('Compose') {
             steps {
                 bat """
-                "${DOCKER_PATH}/docker-compose.exe" -f "${PROJECT_DIR}/docker-compose.yml" up -d
+                docker-compose -f "${PROJECT_DIR}/docker-compose.yml" up -d
                 """
             }
         }
@@ -38,7 +37,7 @@ pipeline {
         stage('Test') {
             steps {
                 bat """
-                "${DOCKER_PATH}/docker-compose.exe" exec django python manage.py test
+                docker-compose exec django python manage.py test
                 """
             }
         }
