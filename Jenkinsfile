@@ -24,12 +24,11 @@ pipeline {
             }
         }
 
-
         stage('Run Docker Compose') {
             steps {
                 script {
-                    dir('/home/shivam/Desktop/fairtrade') {
-                        sh '/usr/bin/docker-compose up -d'
+                    dir('C:/Users/Pythospach/Documents/GitHub/FairTrade') {
+                        bat 'docker-compose up -d'
                     }
                 }
             }
