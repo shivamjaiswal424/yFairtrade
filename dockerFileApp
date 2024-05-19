@@ -24,6 +24,7 @@ COPY current.py /project
 COPY manage.py /project
 COPY requirements.txt /project
 COPY db.sqlite3 /project
+COPY tests.py /project
 
 RUN pip install -r requirements.txt
 RUN python manage.py makemigrations
