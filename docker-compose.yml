@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: dockerFileRepayment
-    image: pythospach/fairtrade_flask_ml:latest
+    # image: pythospach/fairtrade_flask_ml:latest
     ports:
       - "5000:5000"
     networks:
@@ -15,7 +15,7 @@ services:
     build:
       context: .
       dockerfile: dockerFileApp
-    image: pythospach/fairtrade_django:latest
+    # image: pythospach/fairtrade_django:latest
     ports:
       - "8000:8000"
     volumes:

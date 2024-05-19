@@ -17,19 +17,22 @@ pipeline {
             }
         }
 
-        stage('Pull') {
-            steps {
-                bat """
-                docker pull ${DOCKER_HUB_USERNAME}/${SERVER_IMAGE_NAME}:latest
-                docker pull ${DOCKER_HUB_USERNAME}/${APP_IMAGE_NAME}:latest
-                """
-            }
-        }
+        // stage('Pull') {
+        //     steps {
+        //         bat """
+        //         docker pull ${DOCKER_HUB_USERNAME}/${SERVER_IMAGE_NAME}:latest
+        //         docker pull ${DOCKER_HUB_USERNAME}/${APP_IMAGE_NAME}:latest
+        //         """
+        //     }
+        // }
 
         stage('Compose') {
             steps {
+                // bat """
+                // docker-compose -f "${PROJECT_DIR}/docker-compose.yml" up -d
+                // """
                 bat """
-                docker-compose -f "${PROJECT_DIR}/docker-compose.yml" up -d
+                docker-compose up -d
                 """
             }
         }
@@ -40,6 +43,11 @@ pipeline {
                 docker-compose exec django python manage.py test
                 """
             }
+        }
+    }
+    post {
+        always {
+            bat 'docker-compose down'
         }
     }
 }
