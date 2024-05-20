@@ -6,6 +6,6 @@
     - name: Run Docker Compose
       command: /usr/local/bin/docker-compose up -d
       args:
-        chdir: /home/aditya/adityamin/MLOPS/mlops/src
+        chdir: /home/shivam/Desktop/SPE/FairTrade
 
 # ansible-playbook deploy_docker_compose.yml --ask-become-pass
