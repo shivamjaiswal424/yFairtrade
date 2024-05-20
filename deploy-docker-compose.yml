@@ -1,0 +1,27 @@
+hosts: localhost
+become: true
+
+tasks:
+  - name: Stop all running Docker containers
+    ansible.builtin.shell: |
+      if [ "$(docker ps -q)" ]; then
+        docker stop $(docker ps -q)
+      fi
+    ignore_errors: yes
+
+  - name: Remove all stopped Docker containers
+    ansible.builtin.shell: |
+      if [ "$(docker ps -a -q)" ]; then
+        docker rm $(docker ps -a -q)
+      fi
+    ignore_errors: yes
+
+  - name: Ensure Docker Compose services are stopped and removed if they exist
+    ansible.builtin.command:
+      cmd: docker-compose down
+      chdir: /home/shivam/Desktop/SPE/FairTrade
+
+  - name: Ensure Docker Compose services are running
+    ansible.builtin.command:
+      cmd: docker-compose up -d
+      chdir: /home/shivam/Desktop/SPE/FairTrade
