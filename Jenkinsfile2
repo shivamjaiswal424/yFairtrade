@@ -14,11 +14,7 @@ pipeline {
                 url: 'https://github.com/abhinav1829/FairTrade.git'
             }
         }
-        stage('Test') {
-            steps {
-                sh 'python manage.py test'
-            }
-        }
+        
         stage('Docker Login') {
             steps {
                 script {
@@ -60,6 +56,11 @@ pipeline {
                     playbook: 'deploy_docker_compose.yml',
                     inventory: 'inventory'
                 )
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'docker-compose exec django python manage.py test'
             }
         }
 
