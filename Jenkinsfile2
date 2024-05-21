@@ -15,20 +15,22 @@ pipeline {
             }
         }
         
+        stage('Test Django App') {
+            steps {
+                sh '''#!/bin/bash -ex
+                    python3 -m venv venv
+                    source venv/bin/activate  
+                    pip install -r requirements.txt requests
+                    python3 manage.py test
+                '''
+            }
+        }
+
         stage('Docker Login') {
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', 'dockerhub_credentials') {
                         
-                    }
-                }
-            }
-        }
-        stage('Build Flask ML Docker Image') {
-            steps {
-                script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub_credentials') {
-                        docker.build("${DOCKERHUB_REPO_FLASK}:latest", '-f dockerFileRepayment .').push('latest')
                     }
                 }
             }
@@ -39,6 +41,16 @@ pipeline {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', 'dockerhub_credentials') {
                         docker.build("${DOCKERHUB_REPO_DJANGO}:latest", '-f dockerFileApp .').push('latest')
+                    }
+                }
+            }
+        }
+
+        stage('Build Flask ML Docker Image') {
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub_credentials') {
+                        docker.build("${DOCKERHUB_REPO_FLASK}:latest", '-f dockerFileRepayment .').push('latest')
                     }
                 }
             }
@@ -58,12 +70,5 @@ pipeline {
                 )
             }
         }
-        stage('Test') {
-            steps {
-                sh 'docker-compose exec django python manage.py test'
-            }
-        }
-
-        
     }
 }
