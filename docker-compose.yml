@@ -1,10 +1,9 @@
+version: '3'
+
 services:
   flask_ml:
     container_name: flask_ml
-    build:
-      context: .
-      dockerfile: dockerFileRepayment
-    # image: pythospach/fairtrade_flask_ml:latest
+    image: shivam424/flask:latest
     ports:
       - "5000:5000"
     networks:
@@ -12,10 +11,7 @@ services:
 
   django:
     container_name: django
-    build:
-      context: .
-      dockerfile: dockerFileApp
-    # image: pythospach/fairtrade_django:latest
+    image: shivam424/django:latest
     ports:
       - "8000:8000"
     volumes:

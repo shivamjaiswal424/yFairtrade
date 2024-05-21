@@ -1,0 +1,55 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub_credentials')
+        DOCKERHUB_REPO_FLASK = 'shivam424/flask'
+        DOCKERHUB_REPO_DJANGO = 'shivam424/django'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'master', 
+                url: 'https://github.com/abhinav1829/FairTrade.git'
+            }
+        }
+
+        stage('Build Flask ML Docker Image') {
+            steps {
+                script {
+                    docker.build("${DOCKERHUB_REPO_FLASK}:latest", '-f dockerFileRepayment .').push('latest')
+                }
+            }
+        }
+
+        stage('Build Django Docker Image') {
+            steps {
+                script {
+                    docker.build("${DOCKERHUB_REPO_DJANGO}:latest", '-f dockerFileApp .').push('latest')
+                }
+            }
+        }
+
+        stage('Verify Ansible Installation') {
+            steps {
+                sh 'ansible --version'
+            }
+        }
+
+        stage('Run Ansible Playbook') {
+            steps {
+                ansiblePlaybook(
+                    playbook: 'deploy_docker_compose.yml',
+                    inventory: 'inventory'
+                )
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'docker-compose exec django python manage.py test'
+            }
+        }
+    }
+}
