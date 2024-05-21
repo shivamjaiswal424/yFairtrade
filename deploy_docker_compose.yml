@@ -3,6 +3,10 @@
   hosts: localhost
   gather_facts: no
   tasks:
+    - name: Down Docker Compose
+      command: /usr/local/bin/docker-compose down
+      args:
+        chdir: /home/shivam/Desktop/SPE/FairTrade
     - name: Run Docker Compose
       command: /usr/local/bin/docker-compose up -d
       args:
