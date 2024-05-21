@@ -15,7 +15,7 @@ pipeline {
             }
         }
         
-        stage('Test Django App') {
+        stage('Test') {
             steps {
                 sh '''#!/bin/bash -ex
                     python3 -m venv venv
