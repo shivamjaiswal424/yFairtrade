@@ -1,13 +1,12 @@
-version: '3'
-
 services:
   flask_ml:
     container_name: flask_ml
     image: shivam424/flask:latest
     ports:
-      - "5000:5000"
+      - "5001:5000"
     networks:
       - elk
+    platform: linux/amd64
 
   django:
     container_name: django
@@ -20,6 +19,7 @@ services:
       - flask_ml
     networks:
       - elk
+    platform: linux/amd64
 
   Elasticsearch:
     image: elasticsearch:7.16.2
@@ -40,8 +40,8 @@ services:
     image: logstash:7.16.2
     container_name: logstash
     restart: always
-    volumes:
-      - ./logstash/:/logstash_dir
+    # volumes:
+    #   - ./logstash/:/logstash_dir
     command: logstash -f /logstash_dir/logstash.conf
     depends_on:
       - Elasticsearch
