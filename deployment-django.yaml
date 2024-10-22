@@ -14,9 +14,9 @@ spec:
     spec:
       containers:
         - name: django
-          image: ttl.sh/${IMAGE_NAME}:1h  # Your Docker image
+          image: shivam424/django:latest  # Docker image
           ports:
-            - containerPort: 8000  # Port that your application listens on
+            - containerPort: 8000  # Port that application listens on
           resources:
             requests:
               memory: "128Mi"
@@ -31,7 +31,6 @@ spec:
         - name: sqlite-data
           persistentVolumeClaim:
             claimName: sqlite-pvc
-  # Use an empty directory for SQLite data
 ---
 apiVersion: v1
 kind: Service

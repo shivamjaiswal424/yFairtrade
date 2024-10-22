@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-ml  # Changed from flask_ml to flask-ml
+  name: flask-ml  
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: flask-ml  # Changed from flask_ml to flask-ml
+      app: flask-ml  
   template:
     metadata:
       labels:
-        app: flask-ml  # Changed from flask_ml to flask-ml
+        app: flask-ml  
     spec:
       containers:
-        - name: flask-ml  # Changed from flask_ml to flask-ml
-          image: ttl.sh/${IMAGE_NAME}:1h
+        - name: flask-ml  
+          image: shivam424/flask:latest
           env:
             - name: FLASK_APP_HOSTNAME
               value: "flask-ml"
@@ -31,11 +31,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: flask-ml  # Changed from flask_ml to flask-ml
+  name: flask-ml  
 spec:
   type: NodePort
   ports:
     - port: 5000
       targetPort: 5000
   selector:
-    app: flask-ml  # Changed from flask_ml to flask-ml
+    app: flask-ml  
