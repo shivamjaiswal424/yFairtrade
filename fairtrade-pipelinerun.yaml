@@ -1,0 +1,11 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: fairtrade-pipelinerun
+spec:
+  pipelineRef:
+    name: fairtrade-pipeline
+  workspaces:
+    - name: shared-workspace
+      persistentVolumeClaim:
+        claimName: sqlite-pvc

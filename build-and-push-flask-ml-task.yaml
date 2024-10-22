@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: build-and-push-flask-ml-task
+spec:
+  workspaces:
+    - name: source
+  steps:
+    - name: build-flask-ml
+      image: gcr.io/kaniko-project/executor:latest
+      args:
+        - --dockerfile=/workspace/source/dockerFileRepayment
+        - --context=/workspace/source
+        - --destination=ttl.sh/flask-ml:1h  # <-- Static tag for testing

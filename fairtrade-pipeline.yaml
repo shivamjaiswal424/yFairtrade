@@ -1,0 +1,54 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: fairtrade-pipeline
+spec:
+  workspaces:
+    - name: shared-workspace
+  tasks:
+    # Step 1: Clone the repo
+    - name: clone-repo
+      taskRef:
+        name: clone-task
+      workspaces:
+        - name: shared-workspace
+
+    # Step 2: Build and push Django Docker image
+    - name: build-and-push-django
+      taskRef:
+        name: build-and-push-django-task
+      runAfter:
+        - clone-repo
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+
+    # Step 3: Build and push Flask-ML Docker image
+    - name: build-and-push-flask-ml
+      taskRef:
+        name: build-and-push-flask-ml-task
+      runAfter:
+        - clone-repo
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+
+    # Step 4: Deploy Django
+    - name: deploy-django
+      taskRef:
+        name: deploy-django-task
+      runAfter:
+        - build-and-push-django
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+
+    # Step 5: Deploy Flask-ML
+    - name: deploy-flask-ml
+      taskRef:
+        name: deploy-flask-ml-task
+      runAfter:
+        - build-and-push-flask-ml
+      workspaces:
+        - name: source
+          workspace: shared-workspace

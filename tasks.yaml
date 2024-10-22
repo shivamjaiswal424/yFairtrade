@@ -1,0 +1,42 @@
+kubectl delete -f clone-task.yaml
+kubectl delete -f build-and-push-django-task.yaml
+kubectl delete -f build-and-push-flask-ml-task.yaml
+kubectl delete -f deploy-django-task.yaml
+kubectl delete -f deploy-flask-task.yaml
+kubectl delete -f fairtrade-pipeline.yaml
+kubectl delete -f fairtrade-pipelinerun.yaml
+kubectl delete -f pvc.yaml
+
+kubectl delete service django
+kubectl delete service flask-ml
+kubectl delete deployment django
+kubectl delete deployment flask-ml
+
+kubectl apply -f pvc.yaml
+kubectl apply -f clone-task.yaml
+kubectl apply -f build-and-push-django-task.yaml
+kubectl apply -f build-and-push-flask-ml-task.yaml
+kubectl apply -f deploy-django-task.yaml
+kubectl apply -f deploy-flask-task.yaml
+kubectl apply -f fairtrade-pipeline.yaml
+kubectl apply -f fairtrade-pipelinerun.yaml
+
+
+kubectl port-forward service/django 8000:8000
+kubectl port-forward service/flask-ml 5000:5000
+
+tkn pipelinerun describe fairtrade-pipelinerun
+
+tkn pipelinerun logs fairtrade-pipelinerun
+
+tkn taskrun logs fairtrade-pipelinerun-deploy-django
+tkn taskrun logs fairtrade-pipelinerun-clone-repo
+docker system prune -a
+
+minikube ssh -- docker system prune
+
+kubectl get tasks
+
+docker-compose up -d
+
+

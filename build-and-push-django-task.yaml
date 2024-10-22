@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: build-and-push-django-task
+spec:
+  workspaces:
+    - name: source
+  steps:
+    - name: build-django
+      image: gcr.io/kaniko-project/executor:latest
+      args:
+        - --dockerfile=/workspace/source/dockerFileApp
+        - --context=/workspace/source
+        - --destination=ttl.sh/django-app:1h  # <-- Static tag for testing

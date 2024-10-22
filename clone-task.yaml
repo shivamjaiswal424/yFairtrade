@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: clone-task
+spec:
+  workspaces:
+    - name: shared-workspace
+  steps:
+    - name: clone-repo
+      image: alpine/git
+      script: |
+        if [ -d "/workspace/shared-workspace" ] && [ "$(ls -A /workspace/shared-workspace)" ]; then
+          echo "Workspace is not empty. Skipping clone."
+        else
+          echo "Cloning repository..."
+          git clone https://github.com/shivamjaiswal424/yFairtrade.git /workspace/shared-workspace
+        fi

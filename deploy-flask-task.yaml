@@ -1,0 +1,13 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: deploy-flask-ml-task
+spec:
+  workspaces:
+    - name: source  # Reference to workspace
+  steps:
+    - name: deploy-flask-ml
+      image: bitnami/kubectl:latest
+      script: |
+        kubectl apply -f /workspace/source/deployment-flask.yaml
+

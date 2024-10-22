@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-ml  # Changed from flask_ml to flask-ml
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-ml  # Changed from flask_ml to flask-ml
+  template:
+    metadata:
+      labels:
+        app: flask-ml  # Changed from flask_ml to flask-ml
+    spec:
+      containers:
+        - name: flask-ml  # Changed from flask_ml to flask-ml
+          image: ttl.sh/${IMAGE_NAME}:1h
+          env:
+            - name: FLASK_APP_HOSTNAME
+              value: "flask-ml"
+          ports:
+            - containerPort: 5000
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "500m"
+            limits:
+              memory: "256Mi"
+              cpu: "1000m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-ml  # Changed from flask_ml to flask-ml
+spec:
+  type: NodePort
+  ports:
+    - port: 5000
+      targetPort: 5000
+  selector:
+    app: flask-ml  # Changed from flask_ml to flask-ml

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django
+spec:
+  replicas: 1  # Number of desired pods
+  selector:
+    matchLabels:
+      app: django
+  template:
+    metadata:
+      labels:
+        app: django
+    spec:
+      containers:
+        - name: django
+          image: ttl.sh/${IMAGE_NAME}:1h  # Your Docker image
+          ports:
+            - containerPort: 8000  # Port that your application listens on
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "500m"
+            limits:
+              memory: "256Mi"
+              cpu: "1000m"
+          volumeMounts:
+            - name: sqlite-data
+              mountPath: /data  # Path in the container to mount the volume
+      volumes:
+        - name: sqlite-data
+          persistentVolumeClaim:
+            claimName: sqlite-pvc
+  # Use an empty directory for SQLite data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: django
+spec:
+  type: NodePort
+  ports:
+    - port: 8000
+      targetPort: 8000
+  selector:
+    app: django
