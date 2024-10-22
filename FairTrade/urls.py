@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from . import views
+from Borrower.views import prometheus_metrics
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,5 @@ urlpatterns = [
     path('contact_us', views.contact_us, name='contact_us'),
     path('lend/', include('Lender.urls')),
     path('borrow/', include('Borrower.urls')),
+    path('metrics', prometheus_metrics, name='prometheus_metrics'),
 ]

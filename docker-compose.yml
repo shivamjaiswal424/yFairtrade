@@ -1,12 +1,11 @@
 services:
-  flask_ml:
-    container_name: flask_ml
+  flask-ml:
+    container_name: flask-ml
     image: shivam424/flask:latest
     ports:
       - "5001:5000"
     networks:
       - elk
-    platform: linux/amd64
 
   django:
     container_name: django
@@ -16,10 +15,10 @@ services:
     volumes:
       - sqlite_data:/data
     depends_on:
-      - flask_ml
+      - flask-ml
     networks:
       - elk
-    platform: linux/amd64
+
 
   Elasticsearch:
     image: elasticsearch:7.16.2

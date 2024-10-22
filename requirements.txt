@@ -1,3 +1,12 @@
-django
-numpy
-python-logstash
+asgiref==3.8.1
+certifi==2024.8.30
+charset-normalizer==3.4.0
+Django==4.2.16
+idna==3.10
+numpy==1.24.4
+python-logstash==0.4.8
+requests==2.32.3
+sqlparse==0.5.1
+urllib3==2.2.3
+wheel==0.44.0
+prometheus-client
