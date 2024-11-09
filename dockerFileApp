@@ -26,7 +26,9 @@ COPY requirements.txt /project
 COPY db.sqlite3 /project
 COPY tests.py /project
 
-RUN pip install -r requirements.txt
+# Install requirements without hash validation and skip dependencies
+RUN pip install --no-cache-dir --no-deps --trusted-host pypi.org --trusted-host files.pythonhosted.org -r requirements.txt
+
 RUN python manage.py makemigrations
 RUN python manage.py migrate
 EXPOSE 8000
